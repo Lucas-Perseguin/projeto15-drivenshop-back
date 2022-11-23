@@ -1,7 +1,7 @@
 import {
   postUserSignUp,
   postUserSignIn,
-} from '../controllers/users.controllers.js';
+} from '../controllers/users.controller.js';
 
 import { Router } from 'express';
 
