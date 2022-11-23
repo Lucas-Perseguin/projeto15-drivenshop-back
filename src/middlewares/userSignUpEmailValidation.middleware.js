@@ -1,4 +1,4 @@
-import { usersCollection } from '../database/db';
+import { usersCollection } from '../database/db.js';
 
 export default async function userSignUpEmailValidation(req, res, next) {
   const { email } = req.body;
