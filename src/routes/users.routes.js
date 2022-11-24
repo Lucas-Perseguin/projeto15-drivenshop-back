@@ -1,22 +1,33 @@
 import {
   postUserSignUp,
   postUserSignIn,
-} from '../controllers/users.controller.js';
+  getIsToken,
+} from "../controllers/users.controller.js";
 
-import userSchemaValidation from '../middlewares/userSchemaValidation.middleware.js';
-import userSignUpEmailValidation from '../middlewares/userSignUpEmailValidation.middleware.js';
+import userSchemaValidation from "../middlewares/userSchemaValidation.middleware.js";
+import userSignUpEmailValidation from "../middlewares/userSignUpEmailValidation.middleware.js";
 
-import { Router } from 'express';
+import { Router } from "express";
+import signInSchemaValidation from "../middlewares/signInSchemaValidation.middleware.js";
+import signInValidation from "../middlewares/signInValidation.middleware.js";
+import jwtValidation from "../middlewares/jwtValidation.middleware.js";
 
 const router = Router();
 
 router.post(
-  '/sign-up',
+  "/sign-up",
   userSchemaValidation,
   userSignUpEmailValidation,
   postUserSignUp
 );
 
-router.post('/sign-in', postUserSignIn);
+router.post(
+  "/sign-in",
+  signInSchemaValidation,
+  signInValidation,
+  postUserSignIn
+);
+
+router.get("/token", jwtValidation, getIsToken);
 
 export default router;
