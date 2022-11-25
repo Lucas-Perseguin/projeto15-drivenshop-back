@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { usersCollection } from '../database/db,js';
+import { usersCollection } from '../database/db.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
