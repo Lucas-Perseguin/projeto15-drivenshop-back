@@ -58,6 +58,13 @@ export async function decreaseProductInCart() {
 
 export async function deleteProductFromUserCart() {
   try {
+    const productFoud = await cartscollections.findOne({ productId, userId });
+    if (!productFoud) {
+      return res.sendStatus(404);
+    } else {
+      await cartscollections.deleteOne({ userId, productId });
+      return res.sendStatus(200);
+    }
   } catch (error) {
     return res.sendStatus(500);
   }
@@ -65,6 +72,8 @@ export async function deleteProductFromUserCart() {
 
 export async function deleteUserCart() {
   try {
+    await cartscollections.deleteMany({ userId });
+    return res.sendStatus(200);
   } catch (error) {
     return res.sendStatus(500);
   }
