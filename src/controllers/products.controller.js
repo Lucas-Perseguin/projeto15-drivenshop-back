@@ -27,7 +27,7 @@ export async function getProducts(req, res) {
 }
 
 export async function getProductById(req, res) {
-  const { productId } = req.query;
+  const { productId } = req.params;
 
   if (!productId) {
     return res.sendStatus(400);
@@ -45,5 +45,37 @@ export async function getProductById(req, res) {
     res.status(200).send(productFound);
   } catch (err) {
     res.sendStatus(500);
+  }
+}
+
+export async function getProductsByType(req, res) {
+  const { productType } = req.params;
+  if (!productType) return res.sendStatus(400);
+  try {
+    const products = await productsCollection
+      .find({ type: productType })
+      .toArray();
+
+    if (!products) return res.sendStatus(404);
+
+    return res.status(200).send(products);
+  } catch (err) {
+    return res.sendStatus(500);
+  }
+}
+
+export async function getProductsByTypeOnSale(req, res) {
+  const { productType } = req.params;
+
+  if (!productType) return res.sendStatus(400);
+
+  try {
+    const products = await productsCollection
+      .find({ type: productType, sale: true })
+      .toArray();
+    if (!products) return res.sendStatus(404);
+    return res.status(200).send(products);
+  } catch (err) {
+    return res.sendStatus(500);
   }
 }
