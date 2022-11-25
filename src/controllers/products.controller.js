@@ -40,9 +40,9 @@ export async function getProductsByType(req, res) {
 
     if (!products) return res.sendStatus(404);
 
-    res.sendStatus(200).send(products);
+    return res.status(200).send(products);
   } catch (err) {
-    res.sendStatus(500);
+    return res.sendStatus(500);
   }
 }
 
@@ -56,8 +56,8 @@ export async function getProductsByTypeOnSale(req, res) {
       .find({ type: productType, sale: true })
       .toArray();
     if (!products) return res.sendStatus(404);
-    res.sendStatus(200).send(products);
+    return res.status(200).send(products);
   } catch (err) {
-    res.sendStatus(500);
+    return res.sendStatus(500);
   }
 }
