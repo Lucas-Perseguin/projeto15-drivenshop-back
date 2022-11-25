@@ -1,7 +1,7 @@
 import { cartscollections } from '../database/db.js';
 
 export async function postProductToCart(req, res) {
-  const { productId } = req.query;
+  const { productId } = req.params;
   if (!productId) {
     return res.sendStatus(400);
   }
@@ -32,7 +32,7 @@ export async function postProductToCart(req, res) {
 }
 
 export async function decreaseProductInCart() {
-  const { productId } = req.query;
+  const { productId } = req.params;
   if (!productId) {
     return res.sendStatus(400);
   }
@@ -57,7 +57,7 @@ export async function decreaseProductInCart() {
 }
 
 export async function deleteProductFromUserCart() {
-  const { productId } = req.query;
+  const { productId } = req.params;
   if (!productId) {
     return res.sendStatus(400);
   }

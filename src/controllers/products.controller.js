@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb";
-import { productsCollection } from "../database/db.js";
+import { ObjectId } from 'mongodb';
+import { productsCollection } from '../database/db.js';
 
 export async function getProducts(req, res) {
   try {
@@ -9,7 +9,7 @@ export async function getProducts(req, res) {
 }
 
 export async function getProductById(req, res) {
-  const { productId } = req.query;
+  const { productId } = req.params;
 
   if (!productId) {
     return res.sendStatus(400);
