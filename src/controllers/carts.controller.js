@@ -57,6 +57,13 @@ export async function decreaseProductInCart() {
 }
 
 export async function deleteProductFromUserCart() {
+  const { productId } = req.query;
+  if (!productId) {
+    return res.sendStatus(400);
+  }
+
+  const { userId } = res.locals;
+
   try {
     const productFoud = await cartscollections.findOne({ productId, userId });
     if (!productFoud) {
@@ -71,6 +78,8 @@ export async function deleteProductFromUserCart() {
 }
 
 export async function deleteUserCart() {
+  const { userId } = res.locals;
+
   try {
     await cartscollections.deleteMany({ userId });
     return res.sendStatus(200);
