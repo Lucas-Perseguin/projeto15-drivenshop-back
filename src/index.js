@@ -16,5 +16,5 @@ app.use(cartsRouter);
 
 //turn server on
 app.listen(process.env.PORT, () => {
-  console.log('Server running in port 5000');
+  console.log(`Server runnig in port ${process.env.PORT}`);
 });
