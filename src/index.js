@@ -15,7 +15,6 @@ app.use(productsRouter);
 app.use(cartsRouter);
 
 //turn server on
-app.listen(5000, ()=> {
-    console.log("Server running in port 5000")
+app.listen(process.env.PORT, () => {
+  console.log('Server running in port 5000');
 });
-
