@@ -1,10 +1,18 @@
-import { cartscollections } from '../database/db.js';
+import { ObjectId } from 'mongodb';
+import { cartscollections, productsCollection } from '../database/db.js';
 
 export async function getUserCart(req, res) {
   const { userId } = res.locals;
+  const productsArr = [];
 
   try {
     const userCart = await cartscollections.find({ userId }).toArray();
+    userCart.forEach(async (product, index) => {
+      const productFound = await productsCollection.findOne({
+        _id: new ObjectId(product.productId),
+      });
+      userCart[index] = { ...userCart[index], productFound };
+    });
     res.status(200).send(userCart);
   } catch (error) {
     return res.sendStatus(500);
