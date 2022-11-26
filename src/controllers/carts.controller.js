@@ -1,5 +1,16 @@
 import { cartscollections } from '../database/db.js';
 
+export async function getUserCart(req, res) {
+  const { userId } = res.locals;
+
+  try {
+    const userCart = await cartscollections.find({ userId }).toArray();
+    res.status(200).send(userCart);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+}
+
 export async function postProductToCart(req, res) {
   const { productId } = req.params;
   if (!productId) {
