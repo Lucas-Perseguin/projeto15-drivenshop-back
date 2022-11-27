@@ -3,16 +3,15 @@ import { cartscollections, productsCollection } from '../database/db.js';
 
 export async function getUserCart(req, res) {
   const { userId } = res.locals;
-  const productsArr = [];
 
   try {
     const userCart = await cartscollections.find({ userId }).toArray();
-    userCart.forEach(async (product, index) => {
+    for (let i = 0; i < userCart.length; i++) {
       const productFound = await productsCollection.findOne({
-        _id: new ObjectId(product.productId),
+        _id: new ObjectId(userCart[i].productId),
       });
-      userCart[index] = { ...userCart[index], productFound };
-    });
+      userCart[i] = { ...userCart[i], ...productFound };
+    }
     res.status(200).send(userCart);
   } catch (error) {
     return res.sendStatus(500);
