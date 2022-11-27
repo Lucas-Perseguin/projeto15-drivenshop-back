@@ -15,9 +15,13 @@ export async function postUserSignUp(req, res) {
       cpf,
       password: hashPassword,
     });
-    const token = jwt.sign({ id: createdUser._id }, process.env.SECRET_JWT, {
-      expiresIn: 86400,
-    });
+    const token = jwt.sign(
+      { id: createdUser.insertedId },
+      process.env.SECRET_JWT,
+      {
+        expiresIn: 86400,
+      }
+    );
     res.status(201).send(token);
   } catch (err) {
     res.sendStatus(500);
