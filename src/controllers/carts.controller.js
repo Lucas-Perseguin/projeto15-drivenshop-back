@@ -1,5 +1,9 @@
 import { ObjectId } from 'mongodb';
-import { cartscollections, productsCollection } from '../database/db.js';
+import {
+  cartscollections,
+  productsCollection,
+  purchasesCollection,
+} from '../database/db.js';
 
 export async function getUserCart(req, res) {
   const { userId } = res.locals;
@@ -101,6 +105,19 @@ export async function deleteUserCart(req, res) {
   try {
     await cartscollections.deleteMany({ userId });
     return res.sendStatus(200);
+  } catch (error) {
+    return res.sendStatus(500);
+  }
+}
+
+export async function postUserPurchase(req, res) {
+  const { userId } = res.locals;
+  const purchase = req.body;
+  purchase.userId = userId;
+
+  try {
+    await purchasesCollection.insertOne({ purchase });
+    return res.sendStatus(201);
   } catch (error) {
     return res.sendStatus(500);
   }

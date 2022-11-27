@@ -16,3 +16,4 @@ export const usersCollection = db.collection('users');
 export const productsCollection = db.collection('products');
 export const cartscollections = db.collection('carts');
 export const searchCollection = db.collection('search');
+export const purchasesCollection = db.collection('purchases');
