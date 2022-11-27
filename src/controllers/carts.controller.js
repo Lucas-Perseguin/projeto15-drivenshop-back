@@ -49,7 +49,7 @@ export async function postProductToCart(req, res) {
   }
 }
 
-export async function decreaseProductInCart() {
+export async function decreaseProductInCart(req, res) {
   const { productId } = req.params;
   if (!productId) {
     return res.sendStatus(400);
@@ -74,7 +74,7 @@ export async function decreaseProductInCart() {
   }
 }
 
-export async function deleteProductFromUserCart() {
+export async function deleteProductFromUserCart(req, res) {
   const { productId } = req.params;
   if (!productId) {
     return res.sendStatus(400);
@@ -95,7 +95,7 @@ export async function deleteProductFromUserCart() {
   }
 }
 
-export async function deleteUserCart() {
+export async function deleteUserCart(req, res) {
   const { userId } = res.locals;
 
   try {
