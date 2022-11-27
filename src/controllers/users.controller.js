@@ -2,6 +2,7 @@ import { usersCollection } from '../database/db.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import { ObjectId } from 'mongodb';
 
 dotenv.config();
 
@@ -42,4 +43,15 @@ export async function postUserSignIn(req, res) {
 
 export async function getIsToken(req, res) {
   return res.sendStatus(200);
+}
+
+export async function getUSerById(req, res) {
+  const { userId } = res.locals;
+
+  try {
+    const user = await usersCollection.findOne({ _id: new ObjectId(userId) });
+    res.status(200).send(user);
+  } catch (err) {
+    res.sendStatus(500);
+  }
 }
