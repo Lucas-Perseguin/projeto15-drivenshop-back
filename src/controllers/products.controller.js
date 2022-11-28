@@ -2,25 +2,25 @@ import { ObjectId } from 'mongodb';
 import { productsCollection, searchCollection } from '../database/db.js';
 
 export async function getProducts(req, res) {
-  const productName = req.query.name;    
+  const productName = req.query.name;
 
   try {
     const searchProducts = await searchCollection.find().toArray();
-    const products = await productsCollection.find().toArray()
-    if (!productName) {       
-      return res.status(200).send(products);       
-  }
+    const products = await productsCollection.find().toArray();
+    if (!productName) {
+      return res.status(200).send(products);
+    }
     searchProducts.splice(0, 60);
-    for(let i = 0; i < products.length;i++){
+    for (let i = 0; i < products.length; i++) {
       const product = products[i];
-      if(product.name.toLowerCase().includes(productName.toLowerCase())){
-        searchProducts.push(product)
+      if (product.name.toLowerCase().includes(productName.toLowerCase())) {
+        searchProducts.push(product);
       }
-    }    
+    }
     if (searchProducts.length === 0) {
-      return res.send("Produto não encontrado");
-    }    
-     return res.status(200).send(searchProducts); 
+      return res.send('Produto não encontrado');
+    }
+    return res.status(200).send(searchProducts);
   } catch (err) {
     res.sendStatus(500);
   }
