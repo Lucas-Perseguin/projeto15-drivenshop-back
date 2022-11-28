@@ -4,7 +4,7 @@ import {
   postUserSignUp,
   postUserSignIn,
   getIsToken,
-  getUSerById,
+  getUserById,
 } from '../controllers/users.controller.js';
 import userSchemaValidation from '../middlewares/userSchemaValidation.middleware.js';
 import userSignUpEmailValidation from '../middlewares/userSignUpEmailValidation.middleware.js';
@@ -30,7 +30,7 @@ router.post(
 
 router.use(jwtValidation);
 
-router.get('/user', getUSerById);
+router.get('/user', getUserById);
 
 router.get('/token', getIsToken);
 

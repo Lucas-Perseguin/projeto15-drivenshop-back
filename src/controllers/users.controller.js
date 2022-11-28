@@ -45,7 +45,7 @@ export async function getIsToken(req, res) {
   return res.sendStatus(200);
 }
 
-export async function getUSerById(req, res) {
+export async function getUserById(req, res) {
   const { userId } = res.locals;
 
   try {
