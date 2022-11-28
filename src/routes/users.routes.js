@@ -28,10 +28,8 @@ router.post(
   postUserSignIn
 );
 
-router.use(jwtValidation);
+router.get('/user', jwtValidation, getUserById);
 
-router.get('/user', getUserById);
-
-router.get('/token', getIsToken);
+router.get('/token', jwtValidation, getIsToken);
 
 export default router;
